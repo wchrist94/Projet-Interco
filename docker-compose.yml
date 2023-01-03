@@ -1,0 +1,100 @@
+version: '3'
+
+services:
+
+  # AS #
+  AS-router:
+    image: router
+    volumes:
+      - /conf/AS-router:/conf
+    networks:
+      AS:
+        ipv4_address: 120.0.32.3
+
+  AS-dns:
+    image: dns
+    volumes:
+      - /conf/AS-dns:/conf
+    networks:
+      AS:
+        ipv4_address: 120.0.32.2
+
+  # Partie Entreprise de l'AS #
+  acces-entreprise:
+    image: router
+    volumes:
+      - /conf/acces-entreprise:/conf
+    networks:
+      acces-entreprise:
+        ipv4_address: # A définir
+      AS:
+        ipv4_address: 120.0.32.4
+  
+  entreprise1-router:
+    image: router
+    volumes:
+      - /conf/entreprise1-router:/conf
+    networks:
+      entreprise1:
+        ipv4_address: # A définir
+      acces-entreprise:
+        ipv4_address: # A définir
+
+
+  # Partie Client de l'AS #
+  acces-client:
+    image: router
+    volumes:
+      - /conf/acces-client:/conf
+    networks:
+      acces-client:
+        ipv4_address: # A définir
+      AS:
+        ipv4_address: 120.0.32.5
+
+  client1-box:
+    image: box
+    volumes:
+      - /conf/client1-box:/conf
+    networks:
+      client1:
+        ipv4_address: #IP de la machine client1-box
+      acces-client:
+        ipv4_address: 120.0.32.1
+
+  client1-machine:
+    extends:
+    image: client
+    dns: 120.0.32.2
+    volumes:
+      - /conf/client1-machine:/conf
+    networks:
+      client1:
+        ipv4_address: #IP de la machine client1-machine
+
+
+networks:
+  AS:
+    ipam:
+      config:
+        - subnet: 120.0.32.0/20
+
+  acces-entreprise:
+    ipam:
+      config:
+        - subnet: 120.0.48.0/21
+  
+  acces-client:
+    ipam:
+      config:
+        - subnet: 120.0.32.0/21
+
+  client1:
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+
+  entreprise1:
+    ipam:
+      config:
+        - subnet: 120.0.42.0/23
