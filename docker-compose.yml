@@ -38,13 +38,13 @@ services:
       AS-DMZ:
         ipv4_address: 120.0.34.2
   
-  Interco-routeur:
+  interco-routeur:
     extends:
       file: ./docker-compose-common.yml
       service: base
     image: router
     volumes:
-      - ./data/Interco-routeur:/data
+      - ./data/interco-routeur:/data
     networks:
       AS:
         ipv4_address: 120.0.32.4
