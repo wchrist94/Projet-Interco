@@ -58,7 +58,7 @@ services:
       service: base
     image: router
     volumes:
-      - ./data/acces-entreprise:/data
+      - ./data/acces-entreprise-router:/data
     networks:
       acces-entreprise:
         ipv4_address: 120.0.36.1
