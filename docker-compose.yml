@@ -4,97 +4,145 @@ services:
 
   # AS #
   AS-router:
+    extends:
+      file: ./docker-compose-common.yml
+      service: base
     image: router
     volumes:
-      - /conf/AS-router:/conf
+      - ./data/AS-router:/data
     networks:
       AS:
         ipv4_address: 120.0.32.3
 
   AS-dns:
+    extends:
+      file: ./docker-compose-common.yml
+      service: base
     image: dns
     volumes:
-      - /conf/AS-dns:/conf
+      - ./data/AS-dns:/data
     networks:
       AS:
         ipv4_address: 120.0.32.2
 
   # Partie Entreprise de l'AS #
   acces-entreprise:
+    extends:
+      file: ./docker-compose-common.yml
+      service: base
     image: router
     volumes:
-      - /conf/acces-entreprise:/conf
+      - ./data/acces-entreprise:/data
     networks:
-      acces-entreprise:
-        ipv4_address: # A définir
+      # acces-entreprise:
+      #   ipv4_address: # A définir
       AS:
         ipv4_address: 120.0.32.4
   
-  entreprise1-router:
+  entreprise-router:
+    extends:
+      file: ./docker-compose-common.yml
+      service: base
     image: router
     volumes:
-      - /conf/entreprise1-router:/conf
+      - ./data/entreprise-router:/data
+    # networks:
+    #   entreprise:
+    #     ipv4_address: # A définir
+    #   acces-entreprise:
+    #     ipv4_address: # A définir
+
+  entreprise-dns:
+    extends:
+      file: ./docker-compose-common.yml
+      service: base
+    image: dns
+    volumes:
+      - ./data/entreprise-dns:/data
     networks:
-      entreprise1:
-        ipv4_address: # A définir
-      acces-entreprise:
-        ipv4_address: # A définir
+      entreprise-dmz:
+        ipv4_address: 
+
+  entreprise-client:
+    extends:
+      file: ./docker-compose-common.yml
+      service: base
+    image: client
+    dns:
+    volumes:
+      - ./data/entreprise-client:/data
+    networks:
+      - entreprise:
+          ipv4_address: 10.0.0.1
 
 
   # Partie Client de l'AS #
-  acces-client:
+  acces-client-router:
+    extends:
+      file: ./docker-compose-common.yml
+      service: base
     image: router
     volumes:
-      - /conf/acces-client:/conf
+      - ./data/acces-client-router:/data
     networks:
       acces-client:
-        ipv4_address: # A définir
+        ipv4_address: 120.0.40.1
       AS:
-        ipv4_address: 120.0.32.5
+        ipv4_address: 120.0.32.3
 
-  client1-box:
+  client-box:
+    extends:
+    file: ./docker-compose-common.yml
+    service: base
     image: box
     volumes:
-      - /conf/client1-box:/conf
+      - ./data/client-box:/data
     networks:
-      client1:
-        ipv4_address: #IP de la machine client1-box
+      client:
+        ipv4_address: 192.168.0.1
       acces-client:
         ipv4_address: 120.0.32.1
 
-  client1-machine:
+  client-machine:
     extends:
+      file: ./docker-compose-common.yml
+      service: base
     image: client
     dns: 120.0.32.2
     volumes:
-      - /conf/client1-machine:/conf
+      - ./data/client-machine:/data
     networks:
-      client1:
-        ipv4_address: #IP de la machine client1-machine
+      client:
+        ipv4_address: 192.168.0.2
 
 
 networks:
   AS:
     ipam:
       config:
-        - subnet: 120.0.32.0/20
+        - subnet: 120.0.32.0/23
+
+  AS-DMZ:
+    ipam:
+      config:
+        - subnet: 120.0.34.0/23
 
   acces-entreprise:
     ipam:
       config:
-        - subnet: 120.0.48.0/21
+        - subnet: 120.0.36.0/22
   
   acces-client:
     ipam:
       config:
-        - subnet: 120.0.32.0/21
+        - subnet: 120.0.40.0/21
 
-  client1:
+  client:
     ipam:
       config:
         - subnet: 192.168.0.0/24
 
-  entreprise1:
+  entreprise:
     ipam:
       config:
-        - subnet: 120.0.42.0/23
+        - subnet: 10.0.0.8/8
