@@ -37,6 +37,19 @@ services:
     networks:
       AS-DMZ:
         ipv4_address: 120.0.34.2
+  
+  Interco-routeur:
+    extends:
+      file: ./docker-compose-common.yml
+      service: base
+    image: router
+    volumes:
+      - ./data/Interco-routeur:/data
+    networks:
+      AS:
+        ipv4_address: 120.0.32.4
+      interco:
+        ipv4_address: 120.0.38.1
 
   # Partie Entreprise de l'AS #
   acces-entreprise-router:
@@ -157,7 +170,7 @@ networks:
   acces-entreprise:
     ipam:
       config:
-        - subnet: 120.0.36.0/22
+        - subnet: 120.0.36.0/23
   
   acces-client:
     ipam:
@@ -178,3 +191,8 @@ networks:
     ipam:
       config:
         - subnet: 10.0.0.0/9
+
+  interco:
+    ipam:
+      config:
+        - subnet: 120.0.38.0/23
