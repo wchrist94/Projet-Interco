@@ -74,7 +74,7 @@ services:
       - ./data/entreprise-router:/data
     networks:
       entreprise:
-        ipv4_address: 10.64.0.1
+        ipv4_address: 10.128.0.1
       acces-entreprise:
         ipv4_address: 120.0.36.2
 
@@ -99,8 +99,8 @@ services:
     volumes:
       - ./data/entreprise-client:/data
     networks:
-      - entreprise:
-          ipv4_address: 10.64.0.3
+      entreprise:
+          ipv4_address: 10.128.0.3
 
   entreprise-dmz-router:
     extends:
@@ -113,7 +113,7 @@ services:
       entreprise-dmz:
         ipv4_address: 10.0.0.1
       entreprise:
-        ipv4_address: 10.64.0.2
+        ipv4_address: 10.128.0.2
 
 
   # Partie Client de l'AS #
@@ -132,8 +132,8 @@ services:
 
   client-box:
     extends:
-    file: ./docker-compose-common.yml
-    service: base
+      file: ./docker-compose-common.yml
+      service: base
     image: box
     volumes:
       - ./data/client-box:/data
@@ -185,7 +185,7 @@ networks:
   entreprise:
     ipam:
       config:
-        - subnet: 10.64.0.0/9
+        - subnet: 10.128.0.0/9
   
   entreprise-dmz:
     ipam:
