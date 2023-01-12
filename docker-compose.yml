@@ -13,6 +13,8 @@ services:
     networks:
       AS:
         ipv4_address: 120.0.32.4
+      interco:
+        ipv4_address: 120.0.38.1
 
   AS-dmz-router:
     extends:
@@ -46,10 +48,9 @@ services:
     volumes:
       - ./data/interco-routeur:/data
     networks:
-      AS:
-        ipv4_address: 120.0.32.4
       interco:
-        ipv4_address: 120.0.38.1
+        ipv4_address: 120.0.38.2
+
 
   # Partie Entreprise de l'AS #
   acces-entreprise-router:
@@ -141,7 +142,7 @@ services:
       client:
         ipv4_address: 192.168.0.1
       acces-client:
-        ipv4_address: 120.0.32.1
+        ipv4_address: 120.0.40.2
 
   client-machine:
     extends:
