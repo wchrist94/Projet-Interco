@@ -5,7 +5,7 @@ services:
   # AS #
   AS-router:
     extends:
-      file: ./docker-compose-common.yml
+
       service: base
     image: router
     volumes:
@@ -18,7 +18,7 @@ services:
 
   AS-dmz-router:
     extends:
-      file: ./docker-compose-common.yml
+
       service: base
     image: router
     volumes:
@@ -31,7 +31,7 @@ services:
 
   AS-dns:
     extends:
-      file: ./docker-compose-common.yml
+
       service: base
     image: dns-server
     volumes:
@@ -42,7 +42,7 @@ services:
   
   interco-routeur:
     extends:
-      file: ./docker-compose-common.yml
+
       service: base
     image: router
     volumes:
@@ -55,7 +55,6 @@ services:
   # Partie Entreprise de l'AS #
   acces-entreprise-router:
     extends:
-      file: ./docker-compose-common.yml
       service: base
     image: router
     volumes:
@@ -68,11 +67,10 @@ services:
   
   entreprise-box:
     extends:
-      file: ./docker-compose-common.yml
       service: base
     image: box
     volumes:
-      - ./data/entreprise-router:/data
+      - ./data/entreprise-box:/data
     networks:
       entreprise:
         ipv4_address: 10.128.0.1
@@ -81,7 +79,6 @@ services:
 
   entreprise-dns:
     extends:
-      file: ./docker-compose-common.yml
       service: base
     image: dns-server
     volumes:
@@ -93,7 +90,6 @@ services:
 
   entreprise-client:
     extends:
-      file: ./docker-compose-common.yml
       service: base
     image: client
     dns: 10.0.0.2
@@ -105,7 +101,6 @@ services:
 
   entreprise-dmz-router:
     extends:
-      file: ./docker-compose-common.yml
       service: base
     image: router
     volumes:
@@ -120,7 +115,6 @@ services:
   # Partie Client de l'AS #
   acces-client-router:
     extends:
-      file: ./docker-compose-common.yml
       service: base
     image: router
     volumes:
@@ -133,7 +127,6 @@ services:
 
   client-box:
     extends:
-      file: ./docker-compose-common.yml
       service: base
     image: box
     volumes:
@@ -146,7 +139,6 @@ services:
 
   client-machine:
     extends:
-      file: ./docker-compose-common.yml
       service: base
     image: client
     dns: 120.0.34.2
