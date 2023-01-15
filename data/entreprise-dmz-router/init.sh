@@ -1,4 +1,4 @@
 #!/bin/sh
 set -x
 
-ip r r default via 120.0.32.2
+ip r r default via 10.128.0.2

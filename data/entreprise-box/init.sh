@@ -1,7 +1,7 @@
 #!/bin/sh
 set -x
 
-ip r r default via 120.0.38.2
+ip r r default via 120.0.36.2
 
 touch /var/lib/dhcp/dhcpd.leases
 dhcpd eth1
