@@ -4,9 +4,6 @@ services:
 
   # AS #
   AS-router:
-    extends:
-
-      service: base
     image: router
     volumes:
       - ./data/AS-router:/data
@@ -17,9 +14,6 @@ services:
         ipv4_address: 120.0.38.1
 
   AS-dmz-router:
-    extends:
-
-      service: base
     image: router
     volumes:
       - ./data/AS-dmz-router:/data
@@ -30,9 +24,6 @@ services:
         ipv4_address: 120.0.32.1
 
   AS-dns:
-    extends:
-
-      service: base
     image: dns-server
     volumes:
       - ./data/AS-dns:/data
@@ -41,9 +32,6 @@ services:
         ipv4_address: 120.0.34.2
   
   interco-routeur:
-    extends:
-
-      service: base
     image: router
     volumes:
       - ./data/interco-routeur:/data
@@ -54,8 +42,6 @@ services:
 
   # Partie Entreprise de l'AS #
   acces-entreprise-router:
-    extends:
-      service: base
     image: router
     volumes:
       - ./data/acces-entreprise-router:/data
@@ -66,8 +52,6 @@ services:
         ipv4_address: 120.0.32.2
   
   entreprise-box:
-    extends:
-      service: base
     image: box
     volumes:
       - ./data/entreprise-box:/data
@@ -78,8 +62,6 @@ services:
         ipv4_address: 120.0.36.2
 
   entreprise-dns:
-    extends:
-      service: base
     image: dns-server
     volumes:
       - ./data/entreprise-dns:/data
@@ -89,8 +71,6 @@ services:
           10.0.0.2
 
   entreprise-client:
-    extends:
-      service: base
     image: client
     dns: 10.0.0.2
     volumes:
@@ -100,8 +80,6 @@ services:
           ipv4_address: 10.128.0.3
 
   entreprise-dmz-router:
-    extends:
-      service: base
     image: router
     volumes:
       - ./data/entreprise-dmz-router:/data
@@ -114,8 +92,6 @@ services:
 
   # Partie Client de l'AS #
   acces-client-router:
-    extends:
-      service: base
     image: router
     volumes:
       - ./data/acces-client-router:/data
@@ -126,8 +102,6 @@ services:
         ipv4_address: 120.0.32.3
 
   client-box:
-    extends:
-      service: base
     image: box
     volumes:
       - ./data/client-box:/data
@@ -138,8 +112,6 @@ services:
         ipv4_address: 120.0.40.2
 
   client-machine:
-    extends:
-      service: base
     image: client
     dns: 120.0.34.2
     volumes:
