@@ -12,4 +12,4 @@ set -x
   # rc-update add unbound
   # rc-service unbound start
 
-ip r r default via 10.0.0.2
+#ip r r default via 10.0.0.2
