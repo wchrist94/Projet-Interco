@@ -33,7 +33,7 @@ services:
     extends:
       file: ./docker-compose-common.yml
       service: base
-    image: dns
+    image: dns-server
     volumes:
       - ./data/AS-dns:/data
     networks:
@@ -83,7 +83,7 @@ services:
     extends:
       file: ./docker-compose-common.yml
       service: base
-    image: dns
+    image: dns-server
     volumes:
       - ./data/entreprise-dns:/data
     networks:
