@@ -9,9 +9,9 @@ services:
       - ./data/AS-router:/data
     networks:
       AS:
-        ipv4_address: 120.0.32.4
+        ipv4_address: 120.0.32.5
       interco:
-        ipv4_address: 120.0.38.1
+        ipv4_address: 120.0.38.2
 
   AS-dmz-router:
     image: router
@@ -19,9 +19,9 @@ services:
       - ./data/AS-dmz-router:/data
     networks:
       AS-DMZ:
-        ipv4_address: 120.0.34.1
+        ipv4_address: 120.0.34.2
       AS:
-        ipv4_address: 120.0.32.1
+        ipv4_address: 120.0.32.2
 
   AS-dns:
     image: dns-server
@@ -29,7 +29,7 @@ services:
       - ./data/AS-dns:/data
     networks:
       AS-DMZ:
-        ipv4_address: 120.0.34.2
+        ipv4_address: 120.0.34.3
   
   interco-routeur:
     image: router
@@ -37,7 +37,7 @@ services:
       - ./data/interco-routeur:/data
     networks:
       interco:
-        ipv4_address: 120.0.38.2
+        ipv4_address: 120.0.38.3
 
 
   # Partie Entreprise de l'AS #
@@ -47,9 +47,9 @@ services:
       - ./data/acces-entreprise-router:/data
     networks:
       acces-entreprise:
-        ipv4_address: 120.0.36.1
+        ipv4_address: 120.0.36.2
       AS:
-        ipv4_address: 120.0.32.2
+        ipv4_address: 120.0.32.3
   
   entreprise-box:
     image: box
@@ -57,9 +57,9 @@ services:
       - ./data/entreprise-box:/data
     networks:
       entreprise:
-        ipv4_address: 10.128.0.1
+        ipv4_address: 10.128.0.2
       acces-entreprise:
-        ipv4_address: 120.0.36.2
+        ipv4_address: 120.0.36.3
 
   entreprise-dns:
     image: dns-server
@@ -68,16 +68,16 @@ services:
     networks:
       entreprise-dmz:
         ipv4_address: 
-          10.0.0.2
+          10.0.0.3
 
   entreprise-client:
     image: client
-    dns: 10.0.0.2
+    dns: 10.0.0.3
     volumes:
       - ./data/entreprise-client:/data
     networks:
       entreprise:
-          ipv4_address: 10.128.0.3
+          ipv4_address: 10.128.0.4
 
   entreprise-dmz-router:
     image: router
@@ -85,9 +85,9 @@ services:
       - ./data/entreprise-dmz-router:/data
     networks:
       entreprise-dmz:
-        ipv4_address: 10.0.0.1
+        ipv4_address: 10.0.0.2
       entreprise:
-        ipv4_address: 10.128.0.2
+        ipv4_address: 10.128.0.3
 
 
   # Partie Client de l'AS #
@@ -97,9 +97,9 @@ services:
       - ./data/acces-client-router:/data
     networks:
       acces-client:
-        ipv4_address: 120.0.40.1
+        ipv4_address: 120.0.40.2
       AS:
-        ipv4_address: 120.0.32.3
+        ipv4_address: 120.0.32.4
 
   client-box:
     image: box
@@ -107,18 +107,18 @@ services:
       - ./data/client-box:/data
     networks:
       client:
-        ipv4_address: 192.168.0.1
+        ipv4_address: 192.168.0.2
       acces-client:
-        ipv4_address: 120.0.40.2
+        ipv4_address: 120.0.40.3
 
   client-machine:
     image: client
-    dns: 120.0.34.2
+    dns: 120.0.34.3
     volumes:
       - ./data/client-machine:/data
     networks:
       client:
-        ipv4_address: 192.168.0.2
+        ipv4_address: 192.168.0.3
 
 
 networks:
