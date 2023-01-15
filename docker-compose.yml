@@ -52,7 +52,7 @@ services:
         ipv4_address: 120.0.32.3
   
   entreprise-box:
-    image: box
+    image: box-entreprise
     volumes:
       - ./data/entreprise-box:/data
     networks:
@@ -71,7 +71,7 @@ services:
           10.0.0.3
 
   entreprise-client:
-    image: client
+    image: client-entreprise
     dns: 10.0.0.3
     volumes:
       - ./data/entreprise-client:/data

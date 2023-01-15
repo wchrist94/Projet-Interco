@@ -1,12 +1,14 @@
 DOCKER_DIR=Dockerfiles
 
 # List here all images to build and used in the docker-compose.yml files
-all: router box client dns-server
+all: router box client dns-server box-entreprise client-entreprise 
 	@
 
 # List here dependencies if applicable
 router: base-alpine
 box: router
+box-entreprise: router
+client: base-ubuntu
 client: base-ubuntu
 dns-server: base-alpine
 asterisk: base-ubuntu
