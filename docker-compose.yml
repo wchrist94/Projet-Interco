@@ -7,6 +7,9 @@ services:
     image: router
     volumes:
       - ./data/AS-router:/data
+    cap_add:
+      - NET_ADMIN
+      - ALL
     networks:
       AS:
         ipv4_address: 120.0.32.5
@@ -17,6 +20,9 @@ services:
     image: router
     volumes:
       - ./data/AS-dmz-router:/data
+    cap_add:
+      - NET_ADMIN
+      - ALL
     networks:
       AS-DMZ:
         ipv4_address: 120.0.34.2
@@ -25,6 +31,9 @@ services:
 
   AS-dns:
     image: dns-server
+    cap_add:
+      - NET_ADMIN
+      - ALL
     volumes:
       - ./data/AS-dns:/data
     networks:
@@ -33,6 +42,9 @@ services:
   
   interco-routeur:
     image: router
+    cap_add:
+      - NET_ADMIN
+      - ALL
     volumes:
       - ./data/interco-routeur:/data
     networks:
@@ -43,6 +55,9 @@ services:
   # Partie Entreprise de l'AS #
   acces-entreprise-router:
     image: router
+    cap_add:
+      - NET_ADMIN
+      - ALL
     volumes:
       - ./data/acces-entreprise-router:/data
     networks:
@@ -53,6 +68,9 @@ services:
   
   entreprise-box:
     image: box-entreprise
+    cap_add:
+      - NET_ADMIN
+      - ALL
     volumes:
       - ./data/entreprise-box:/data
     networks:
@@ -63,6 +81,9 @@ services:
 
   entreprise-dns:
     image: dns-server
+    cap_add:
+      - NET_ADMIN
+      - ALL
     volumes:
       - ./data/entreprise-dns:/data
     networks:
@@ -72,6 +93,9 @@ services:
 
   entreprise-client:
     image: client-entreprise
+    cap_add:
+      - NET_ADMIN
+      - ALL
     dns: 10.0.0.3
     volumes:
       - ./data/entreprise-client:/data
@@ -81,6 +105,9 @@ services:
 
   entreprise-dmz-router:
     image: router
+    cap_add:
+      - NET_ADMIN
+      - ALL
     volumes:
       - ./data/entreprise-dmz-router:/data
     networks:
@@ -93,6 +120,9 @@ services:
   # Partie Client de l'AS #
   acces-client-router:
     image: router
+    cap_add:
+      - NET_ADMIN
+      - ALL
     volumes:
       - ./data/acces-client-router:/data
     networks:
@@ -103,6 +133,9 @@ services:
 
   client-box:
     image: box
+    cap_add:
+      - NET_ADMIN
+      - ALL
     volumes:
       - ./data/client-box:/data
     networks:
@@ -113,6 +146,9 @@ services:
 
   client-machine:
     image: client
+    cap_add:
+      - NET_ADMIN
+      - ALL
     dns: 120.0.34.3
     volumes:
       - ./data/client-machine:/data
